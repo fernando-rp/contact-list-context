@@ -23,7 +23,7 @@ const EditUser = () => {
                             <div className="card my-5">
                                 <div className="card-header">
                                     <h2 className="card-title">
-                                        Editar Usuario ({id})
+                                        Editar Contacto ({id})
                                 </h2>
                                 </div>
                                 <div className="card-body">

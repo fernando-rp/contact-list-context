@@ -3,9 +3,30 @@ const getState = ({ getStore, getActions, setStore }) => {
         store: {
             users: null,
             error: null,
-            user: null
-        },
+            user: null,
+            },
         actions: {
+            handleUsers: (id,index)=>{
+                // const { users } = getStore();
+                // users.splice([index], 1);
+                // setStore({
+                //     users: users
+                // })
+
+                fetch(`http://localhost:3001/users/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then((response) => {
+                        if (!response.ok) setStore({ error: response.error });
+                        return response.json()
+                    })
+                    .then((data) => {
+                        console.log(data)
+                        getActions().getUsers("http://localhost:3001/users")
+                    })
+                    .catch(() => {
+                    })
+            },
             handleChange: e => {
                 const { user } = getStore();
                 user[e.target.name] = e.target.value;
@@ -59,14 +80,32 @@ const getState = ({ getStore, getActions, setStore }) => {
                     .then((data) => {
                         console.log(data)
                         getActions().getUsers("http://localhost:3001/users")
-                        /* setStore({
-                            user: data
-                        }) */
+
                     })
                     .catch(() => {
 
                     })
-            }
+            },
+            addUsers: ( url,nuser) => {
+                fetch(`${url}`, {
+                    method: 'POST',
+                    body: JSON.stringify(nuser),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then((response) => {
+                        if (!response.ok) setStore({ error: response.error });
+                        return response.json()
+                    })
+                    .then((data) => {
+                        console.log(data)
+                        getActions().getUsers("http://localhost:3001/users")
+                    })
+                    .catch(() => {
+
+                    })
+            },
         }
     }
 }

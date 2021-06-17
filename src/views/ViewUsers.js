@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const ViewUsers = () => {
-    const { store } = useContext(Context);
+    const { store, actions } = useContext(Context);
     const { users } = store;
 
     return (
@@ -46,66 +46,43 @@ const ViewUsers = () => {
                                                             </Link>
                                                         </td>
                                                         <td>
-                                                            <Link to="" className="btn btn-danger btn-sm">
-                                                                <i className="fa fa-trash"></i>
+                                                            <Link to="" className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete">
+                                                                <i className="fa fa-trash" ></i>
                                                             </Link>
+
+                                                            {/* onClick={()=>{actions.handleUsers(user.id,index)}} */}
+                                                            
+
+                                                            <div className="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div className="modal-dialog">
+                                                                    <div className="modal-content">
+                                                                        <div className="modal-header">
+                                                                            {/* <h5 className="modal-title" id="exampleModalLabel"></h5> */}
+                                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div className="modal-body">
+                                                                        ¿Estás seguro que quieres eliminar el contacto?
+                                                                        </div>
+                                                                        <div className="modal-footer">
+                                                                            <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={()=>{actions.handleUsers(user.id,index)}}>Eliminar</button>
+                                                                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 )
                                             })
                                         }
 
-
-
-                                        {/* <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>
-                                                <Link to={`/${1}/edit`} className="btn btn-info btn-sm">
-                                                    <i className="fa fa-edit"></i>
-                                                </Link>
-                                            </td>
-                                            <td>
-                                                <Link to="" className="btn btn-danger btn-sm">
-                                                    <i className="fa fa-trash"></i>
-                                                </Link>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                            <td>
-                                                <Link to={`/${2}/edit`} className="btn btn-info btn-sm">
-                                                    <i className="fa fa-edit"></i>
-                                                </Link>
-                                            </td>
-                                            <td>
-                                                <a href="" className="btn btn-danger btn-sm">
-                                                    <i className="fa fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                            <td>
-                                                <Link to={`/${3}/edit`} className="btn btn-info btn-sm">
-                                                    <i className="fa fa-edit"></i>
-                                                </Link>
-                                            </td>
-                                            <td>
-                                                <a href="" className="btn btn-danger btn-sm">
-                                                    <i className="fa fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr> */}
                                     </tbody>
                                 </table>
+                            </div>
+                            <div className="card-footer d-flex justify-content-end">
+                                <Link to="/newuser" className="btn btn-success btn-sm">
+                                    Agregar Contacto
+                                </Link>
                             </div>
                         </div>
                     </div>
